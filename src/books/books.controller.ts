@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 //import { Book } from './interfaces/book.interface';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { ApiResponse } from '@nestjs/swagger';
 import { Book } from './schemas/book.schema';
+import { queryObjects } from 'v8';
 
 @Controller('api/books')
 export class BooksController {
@@ -13,8 +14,14 @@ export class BooksController {
     @Get()
     @ApiResponse({ status: 200, description: 'List of Book has been successfully return.'})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    async findAll(): Promise<Book[]> {
-        return this.booksService.findAll();
+    async findAll(
+        @Query('page') page: number = 1,
+        @Query('limit') limit: number = 10,
+        @Query('search') search: string = ''
+    ): Promise<{ books: Book[], totalPages: number }> {
+        const { books, total } = await this.booksService.findAll(page, limit, search);
+        const totalPages = Math.ceil(total / limit);
+        return { books, totalPages };
     }
 
     @Get(':id')
