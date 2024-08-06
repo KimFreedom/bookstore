@@ -36,7 +36,7 @@ $ npm install
 #### 환경 변수 설정
 '.env' 파일을 생성하고 다음 변수를 설정하세요
 ``` bash
-MONGODB_URI=mongodb+srv://lordudt:lpZibGxsQwJqgfel@bookstore.8dxscum.mongodb.net/?retryWrites=true&w=majority&appName=BookStore
+MONGODB_URI="Top Secret"
 PORT=3000
 ```
 
