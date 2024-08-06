@@ -1,11 +1,9 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, Query } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
-//import { Book } from './interfaces/book.interface';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { ApiResponse } from '@nestjs/swagger';
 import { Book } from './schemas/book.schema';
-import { queryObjects } from 'v8';
 
 @Controller('api/books')
 export class BooksController {
